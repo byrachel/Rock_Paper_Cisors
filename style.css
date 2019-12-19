@@ -107,8 +107,6 @@ p {
 
 .play-button {
     border: none;
-    background: black;
-    color: #ffffff;
     font-weight: 700;
     letter-spacing: 5px;
     font-size: 1.6em;
@@ -118,15 +116,18 @@ p {
     transition: all 0.3s ease 0s;
     cursor: pointer;
     margin: 5%;
-    }
-
-.play-button:hover{
+    border-radius: 5px;
     color: #404040;
-    font-weight: 700;
-    letter-spacing: 10px;
     background: none;
     -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
     -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    }
+
+.play-button:hover{
+    color: #ffffff;
+    letter-spacing: 10px;
+    background: black;
+
     transition: all 0.3s ease 0s;     
 }
 
@@ -208,4 +209,9 @@ p {
 footer {
     background-color: whitesmoke;
     padding: 2%;
+}
+
+#item-selected {
+    height: 80px;
+    padding: 10px 0;
 }

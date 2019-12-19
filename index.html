@@ -23,8 +23,9 @@
 
   <div id="container">
     <div class="part">
+      <h2 class="uppercase">Game :</h2>
+      <div id="item-selected"></div>
       <h2 class="uppercase">Scores :</h2>
-      <br />
       <p class="center inline">Player 1</p> <div id="score-one" class="box"></div>
       <br />
       <p class="center inline">Player 2</p><div id="score-two" class="box"></div>
@@ -34,19 +35,29 @@
 
     <div class="game-part">
       <div id="alert"></div>
-      <div id="item-selected"></div>
-      <div id="game-space" class="center"></div>
+      <div id="game-space" class="center">
+        <h3>How it works ?</h3>
+        <h4 class="center">You've got 2 possibilities :</h4>
+        <br />
+        <p><strong>You want to see desktops playing randomly ?</strong></p>
+        <p>Choose "desktop only".</p>
+        <br />
+        <p><strong>You want to fight the desktop ?</strong></p>
+        <p>Choose "Human v/s Desktop" and choose an item.</p>
+        <br />
+        <h3>Good luck</h3>
+      </div>
     </div>
 
     <div class="part">
       <div class="card">
-        <button onclick="getPlayerChoice('pierre')" class="button-card"><img src="img/pierre.png" class="img-card" /></button>
+        <button onclick="getPlayerChoice('rock')" class="button-card"><img src="img/pierre.png" class="img-card" /></button>
       </div>
       <div class="card">
-         <button onclick="getPlayerChoice('feuille')" class="button-card" ><img src="img/feuille.png" class="img-card"/></button>
+         <button onclick="getPlayerChoice('paper')" class="button-card" ><img src="img/feuille.png" class="img-card"/></button>
       </div>
       <div class="card">
-          <button onclick="getPlayerChoice('ciseaux')"class="button-card" ><img src="img/ciseau.png" class="img-card"/></button>
+          <button onclick="getPlayerChoice('cisors')"class="button-card" ><img src="img/ciseau.png" class="img-card"/></button>
       </div>
     </div>
 

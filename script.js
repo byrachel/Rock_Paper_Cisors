@@ -6,24 +6,24 @@ let playerItem = getPlayerChoice = playerChoice => {
 }
 
 // Fonction pour définir le choix automatique (desktop)
-function getRandomItem() {
-    choice = Math.floor(Math.random()*Math.floor(3));
-    console.log('randomItem : ' + choice);
-    switch(choice) {
+getRandomItem = () => {
+    let desktopChoice = Math.floor(Math.random()*Math.floor(3));
+    console.log('randomItem : ' + desktopChoice);
+    switch(desktopChoice) {
         case 0 :
-            choice = 'pierre';
+            desktopChoice = 'rock';
             break;
         case 1 :
-            choice = 'feuille';
+            desktopChoice = 'paper';
             break;
         case 2 :
-            choice = 'ciseaux';
+            desktopChoice = 'cisors';
             break;
         default:
             alert('Please, select a card.');
     }
-    console.log('randomItemValue :' + choice);
-    return choice;
+    console.log('Random desktopChoice :' + desktopChoice);
+    return desktopChoice;
 }
 
 // Variables des scores
@@ -34,45 +34,44 @@ let player2Score = 0;
 let alreadyPlaying = false;
 
 // Afficher le bouton "stop this game"
-stopThisGame = () => {
-    let stopButton = document.createElement('div');
+stopThisGameButton = () => {
+    let stopButton = document.getElementById('stop');
     stopButton.innerHTML = '<button onclick="stopGame()">Stop this game</button></div>';
-    document.getElementById('stop').appendChild(stopButton);
 }
 
 // Sélection du type de jeu
 gameSelection = (choice) => {
-    
+
     if(choice === 'desktopOnly' && alreadyPlaying === false) {
         gameChoice = 'desktopOnly';
         alreadyPlaying = true;
         // Ajout du bouton PLAY dans le DOM
-        let GameDiv = document.createElement('div');
-        GameDiv.innerHTML = '<h3>Desktop v/s Desktop</h3><p>Click "play" when you are ready.</p><br /><button onclick="playGameDesktopOnly()" class="play-button" >Play</button><br />';
-        document.getElementById('game-space').appendChild(GameDiv);
-        stopThisGame();
+        let GameDiv = document.getElementById('game-space');
+        GameDiv.innerHTML = '<h3>Desktop v/s Desktop</h3><p>_</p><p>Click "play" when you are ready.</p><br /><button onclick="playGameDesktopOnly()" class="play-button" >Play</button>';
+        // Ajout du bouton STOP
+        stopThisGameButton();
+        return gameChoice;
     }
     else if(choice === 'desktopOnly' && alreadyPlaying === true) {
         // Message d'alerte -> Stopper le jeu avant de changer de type de jeu
-        let alert = document.createElement('div');
-        alert.innerHTML = '<p class="red center">Caution : Stop the game before !';
-        document.getElementById('alert').appendChild(alert);
+        let alert = document.getElementById('alert');
+        alert.innerHTML = '<p class="red center">Do you want to quit this game ?</p><p class="red center"> Click "Stop this game" or continue.</p><br />';
     }
     else if(choice === 'humanVsDesktop' && alreadyPlaying === false) {
         gameChoice = 'humanVsDesktop';
         alreadyPlaying = true;
         console.log('alreadyPlaying : ' + alreadyPlaying + '- gameChoice : ' + gameChoice)
         // Ajout du bouton PLAY dans le DOM
-        let GameDiv = document.createElement('div');
-        GameDiv.innerHTML = '<h3>Human v/s Desktop</h3><br /><h4 class="center">Which item do you want to play ?</h4><p>Rock, paper or cisorcs ?</p><p>Click on a picture, then on the play button.</p><p>Good luck !</p><br /><button onclick="playGameHumanVsDesktop()" class="play-button">Play</button><br />';
-        document.getElementById('game-space').appendChild(GameDiv);
-        stopThisGame();
+        let GameDiv = document.getElementById('game-space');
+        GameDiv.innerHTML = '<h3>Human v/s Desktop</h3><p>_</p><h4 class="center">Which item do you want to play ?</h4><p>Rock, paper or cisorcs ?</p><p>Click on a picture, then on the play button.</p><p>Good luck !</p><br /><button onclick="playGameHumanVsDesktop()" class="play-button">Play</button><br />';
+        // Ajout du bouton STOP
+        stopThisGameButton();
+        return gameChoice;
     }
     else if(choice === 'humanVsDesktop' && alreadyPlaying === true) {
         // Message d'alerte -> Stopper le jeu avant de changer de type de jeu
-        let alert = document.createElement('div');
-        alert.innerHTML = '<p class="red center">Caution : Stop the game before !';
-        document.getElementById('alert').appendChild(alert);
+        let alert = document.getElementById('alert');
+        alert.innerHTML = '<p class="red center">Do you want to quit this game ?</p><p class="red center"> Click "Stop this game" or continue.</p><br />';
     }
     else {
         console.log('Error : gameChoice')
@@ -94,26 +93,24 @@ playGameDesktopOnly = () => {
 playGameHumanVsDesktop = () => {
     let player1 = playerItem;
     let player2 = getRandomItem();
-    getScore(choice,player1,player2);
+    getScore(player1,player2);
     displaySelectedItems(player1,player2);
     displayScores(player1Score,player2Score);
-    console.log('Player 1 score : ' + player1Score  + 'Player 2 score : ' + player2Score)
+    console.log('Player 1 score : ' + player1Score  + 'Player 2 score : ' + player2Score);
 }
 
 // Insertion des scores dans le DOM
 displayScores = (player1Score,player2Score) => {
     if(player1Score>=0 && player2Score>=0) {
         // Score player 1
-        let scoreOne = document.createElement('div');
+        let scoreOne = document.getElementById('score-one');
         scoreOne.innerHTML = '<p class="center">' + player1Score + '</p>';
-        document.getElementById('score-one').appendChild(scoreOne);
         // Score player 2
-        let scoreTwo = document.createElement('div');
+        let scoreTwo = document.getElementById('score-two');
         scoreTwo.innerHTML = '<p class="center">' + player2Score + '</p>';
-        document.getElementById('score-two').appendChild(scoreTwo);
     }
     else {
-        console.log('Error : no score to display.')
+        console.log('Error : no score to display.');
     }
 }
 
@@ -125,37 +122,34 @@ getScore = (player1,player2) => {
     }
     else {
         switch(player1) {
-            case 'pierre' :
-                if(player2 === 'feuille') {
-                    player2Score ++;
+            case 'rock' :
+                if(player2 === 'paper') {
+                    player2Score +=1;
                     console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-                } else if(player2 === 'ciseaux') {
-                    player1Score ++;
-                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-
-                }
-                break;
-            case 'feuille' :
-                if(player2 === 'ciseaux') {
-                    player2Score ++;
-                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-                }
-                else if(player2 === 'pierre') {
-                    player1Score ++;
+                } else if(player2 === 'cisors') {
+                    player1Score +=1;
                     console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
 
                 }
                 break;
-            case 'ciseaux' :
-                if(player2 === 'feuille') {
-                    player1Score ++;
+            case 'paper' :
+                if(player2 === 'cisors') {
+                    player2Score +=1;
                     console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-
                 }
-                else if(player2 === 'pierre') {
-                    player2Score ++;
+                else if(player2 === 'rock') {
+                    player1Score +=1;
                     console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-
+                }
+                break;
+            case 'cisors' :
+                if(player2 === 'paper') {
+                    player1Score +=1;
+                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
+                }
+                else if(player2 === 'rock') {
+                    player2Score +=1;
+                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
                 }
                 break;
             default:
@@ -167,17 +161,17 @@ getScore = (player1,player2) => {
 
 // Affichage des items sélectionnés
 displaySelectedItems = (player1,player2) => {
-    if((player1 === 'pierre') || (player1 === 'feuille') || (player1 === 'ciseaux')) {
-    let itemsSelected = document.createElement('div');
-    itemsSelected.innerHTML = '<p>Player 1 : ' + player1 + ' - Player 2 : ' + player2 + '</p>';
-    document.getElementById('item-selected').appendChild(itemsSelected);
+
+    if((player1 === 'rock') || (player1 === 'paper') || (player1 === 'cisors')) {
+        let itemsSelected = document.getElementById('item-selected');
+        itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
     }
     else {
-        let itemAlert = document.createElement('div');
+        let itemAlert = document.getElementById('alert')
         itemAlert.innerHTML = '<h2 class="red center">Oups ! Select an item to start the game.</h2>';
-        document.getElementById('item-selected').appendChild(itemAlert);
     }
 }
+
 
 stopGame = () => {
     window.location.reload();
