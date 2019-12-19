@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <link href="style.css" rel="stylesheet">
+  <title>Rock - Paper - Cisors</title>
+</head>
+<body>
+  <header>
+    <h1 class="center">Rock Paper Cisors</h1>
+    <div class="container-header">
+      <div class="game-selection">
+        <p>First, choose your game :</p>
+      </div>
+      <div class="game-selection">
+        <button onclick="gameSelection('desktopOnly')">Desktop Only</button>
+        <button onclick="gameSelection('humanVsDesktop')">Human Vs Desktop</button>
+      </div>
+    </div>
+  </header>
+  <br />
+  <section>
+    <div id="container">
+      <div class="part">
+        <p class="center">- Player 1 -</p>
+        <div id="score-one" class="box"></div>
+      </div>
+      <div class="game-part">
+        <div id="alert"></div>
+        <div id="play-desktop-only" class="center"></div>
+        <div id="play-human-desktop" class="center"></div>
+        <div class="game-selection center"><button onclick="stopGame()">Stop this game</button></div>
+        <div id="question"></div>
+      </div>
+      <div class="part">
+        <p class="center">- Player 2 -</p>
+        <div id="score-two" class="box"></div>
+      </div>
+    </div>
+    <div id="question"><h4 class="center">Let's have some fun !</h4></div>
+    <div id="card-container">
+      <div class="card">
+        <button onclick="getPlayerChoice('pierre')" class="button-card"><img src="pierre.png" class="img-card" /></button>
+      </div>
+      <div class="card">
+        <button onclick="getPlayerChoice('feuille')" class="button-card" ><img src="feuille.png" class="img-card"/></button>
+      </div>
+      <div class="card">
+        <button onclick="getPlayerChoice('ciseaux')"class="button-card" ><img src="ciseau.png" class="img-card"/></button>
+      </div>
+    </div>
+  </section>
+
+</body>
+<script src="script.js"></script>
+</html>
