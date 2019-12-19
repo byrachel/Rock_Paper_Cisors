@@ -5,7 +5,7 @@ let playerItem = getPlayerChoice = playerChoice => {
     console.log('getPlayerChoice : ' + playerItem);
 }
 
-// Fonction pour définir le choix automatique
+// Fonction pour définir le choix automatique (desktop)
 function getRandomItem() {
     choice = Math.floor(Math.random()*Math.floor(3));
     console.log('randomItem : ' + choice);
@@ -33,20 +33,29 @@ let player2Score = 0;
 // Vérifier si une partie est en cours
 let alreadyPlaying = false;
 
+// Afficher le bouton "stop this game"
+stopThisGame = () => {
+    let stopButton = document.createElement('div');
+    stopButton.innerHTML = '<button onclick="stopGame()">Stop this game</button></div>';
+    document.getElementById('stop').appendChild(stopButton);
+}
+
 // Sélection du type de jeu
-gameSelection = choice => {
+gameSelection = (choice) => {
+    
     if(choice === 'desktopOnly' && alreadyPlaying === false) {
         gameChoice = 'desktopOnly';
         alreadyPlaying = true;
         // Ajout du bouton PLAY dans le DOM
-        let desktopGameDiv = document.createElement('div');
-        desktopGameDiv.innerHTML = '<h3>Desktop v/s Desktop</h3><p>Click "play" when you are ready.</p><br /><button onclick="playGameDesktopOnly()" class="play-button" >Play</button><br />';
-        document.getElementById('play-desktop-only').appendChild(desktopGameDiv);
+        let GameDiv = document.createElement('div');
+        GameDiv.innerHTML = '<h3>Desktop v/s Desktop</h3><p>Click "play" when you are ready.</p><br /><button onclick="playGameDesktopOnly()" class="play-button" >Play</button><br />';
+        document.getElementById('game-space').appendChild(GameDiv);
+        stopThisGame();
     }
     else if(choice === 'desktopOnly' && alreadyPlaying === true) {
         // Message d'alerte -> Stopper le jeu avant de changer de type de jeu
         let alert = document.createElement('div');
-        alert.innerHTML = '<p class="red center bold">Caution : Stop the game before !';
+        alert.innerHTML = '<p class="red center">Caution : Stop the game before !';
         document.getElementById('alert').appendChild(alert);
     }
     else if(choice === 'humanVsDesktop' && alreadyPlaying === false) {
@@ -54,14 +63,15 @@ gameSelection = choice => {
         alreadyPlaying = true;
         console.log('alreadyPlaying : ' + alreadyPlaying + '- gameChoice : ' + gameChoice)
         // Ajout du bouton PLAY dans le DOM
-        let humanGameDiv = document.createElement('div');
-        humanGameDiv.innerHTML = '<h3>Human v/s Desktop</h3><p class="center">First : select an item.</p><p class="center">Good luck :)</p><br /><button onclick="playGameHumanVsDesktop()" class="play-button">Play</button><br /><br /><h3 class="center">Which item do you want to play ?</h3>';
-        document.getElementById('play-human-desktop').appendChild(humanGameDiv);
+        let GameDiv = document.createElement('div');
+        GameDiv.innerHTML = '<h3>Human v/s Desktop</h3><br /><h4 class="center">Which item do you want to play ?</h4><p>Rock, paper or cisorcs ?</p><p>Click on a picture, then on the play button.</p><p>Good luck !</p><br /><button onclick="playGameHumanVsDesktop()" class="play-button">Play</button><br />';
+        document.getElementById('game-space').appendChild(GameDiv);
+        stopThisGame();
     }
     else if(choice === 'humanVsDesktop' && alreadyPlaying === true) {
         // Message d'alerte -> Stopper le jeu avant de changer de type de jeu
         let alert = document.createElement('div');
-        alert.innerHTML = '<p class="red center bold">Caution : Stop the game before !';
+        alert.innerHTML = '<p class="red center">Caution : Stop the game before !';
         document.getElementById('alert').appendChild(alert);
     }
     else {
@@ -74,16 +84,18 @@ gameSelection = choice => {
 playGameDesktopOnly = () => {
     let player1 = getRandomItem();
     let player2 = getRandomItem();
-    getScore(player1,player2);
-    displayScores(player1Score,player2Score);
-    console.log('Player 1 score : ' + player1Score  + 'Player 2 score : ' + player2Score)
-    }
+        getScore(player1,player2);
+        displaySelectedItems(player1,player2);
+        displayScores(player1Score,player2Score);
+        console.log('Player1 score : ' + player1Score  + '-' + 'Player2 score : ' + player2Score)
+}
 
 // Lancer le jeu : Desktop Vs Human
 playGameHumanVsDesktop = () => {
     let player1 = playerItem;
     let player2 = getRandomItem();
-    getScore(player1,player2);
+    getScore(choice,player1,player2);
+    displaySelectedItems(player1,player2);
     displayScores(player1Score,player2Score);
     console.log('Player 1 score : ' + player1Score  + 'Player 2 score : ' + player2Score)
 }
@@ -109,37 +121,41 @@ displayScores = (player1Score,player2Score) => {
 
 getScore = (player1,player2) => {
     if(player1 === player2) {
-        console.log('Match nul')
+        console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
     }
     else {
         switch(player1) {
             case 'pierre' :
                 if(player2 === 'feuille') {
                     player2Score ++;
-                    console.log('Player 1 : ' + player1Score + ' - Player 2 : ' + player2Score)
+                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
                 } else if(player2 === 'ciseaux') {
                     player1Score ++;
-                    console.log('Player 1 : ' + player1Score + ' - Player 2 : ' + player2Score)
+                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
+
                 }
                 break;
             case 'feuille' :
                 if(player2 === 'ciseaux') {
                     player2Score ++;
-                    console.log('Player 1 : ' + player1Score + ' - Player 2 : ' + player2Score)
+                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
                 }
                 else if(player2 === 'pierre') {
                     player1Score ++;
-                    console.log('Player 1 : ' + player1Score + ' - Player 2 : ' + player2Score)
+                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
+
                 }
                 break;
             case 'ciseaux' :
                 if(player2 === 'feuille') {
                     player1Score ++;
-                    console.log('Player 1 : ' + player1Score + ' - Player 2 : ' + player2Score)
+                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
+
                 }
                 else if(player2 === 'pierre') {
                     player2Score ++;
-                    console.log('Player 1 : ' + player1Score + ' - Player 2 : ' + player2Score)
+                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
+
                 }
                 break;
             default:
@@ -149,10 +165,20 @@ getScore = (player1,player2) => {
     }
 }
 
+// Affichage des items sélectionnés
+displaySelectedItems = (player1,player2) => {
+    if((player1 === 'pierre') || (player1 === 'feuille') || (player1 === 'ciseaux')) {
+    let itemsSelected = document.createElement('div');
+    itemsSelected.innerHTML = '<p>Player 1 : ' + player1 + ' - Player 2 : ' + player2 + '</p>';
+    document.getElementById('item-selected').appendChild(itemsSelected);
+    }
+    else {
+        let itemAlert = document.createElement('div');
+        itemAlert.innerHTML = '<h2 class="red center">Oups ! Select an item to start the game.</h2>';
+        document.getElementById('item-selected').appendChild(itemAlert);
+    }
+}
+
 stopGame = () => {
-    alreadyPlaying = false;
-    console.log('alreadyPlaying : ' + alreadyPlaying)
-    player1Score = 0;
-    player2Score = 0;
-    console.log('Player 1 : ' + player1Score + ' - Player 2 : ' + player2Score)
+    window.location.reload();
 }

@@ -1,11 +1,13 @@
 body {
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
 }  
-    
+header {
+    margin: 4%;
+}
 .container-header {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-content: flex-start;
     align-items: flex-start;
@@ -18,13 +20,12 @@ h1 {
     letter-spacing: 5px;
     font-weight: 700;
     font-size: 1em;
-    margin: 4%;
     }
 
 h2 {
     font-weight: 700;
     font-size: 0.7em;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 h3 {
@@ -36,6 +37,13 @@ h3 {
 }
 
 h4 {
+    font-weight: 300;
+    font-size: 1em;
+    color: silver;
+    letter-spacing: 2px;
+}
+
+.slogan {
     font-weight: 300;
     font-size: 0.8em;
     letter-spacing: 5px;
@@ -76,24 +84,46 @@ p {
     outline: none;
 }
 
+#stop button {
+    border-radius: 0%;
+    border: solid 1px silver;
+    padding: 8px;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+
+#stop button:hover {
+    background-color: lightseagreen ;
+    border: solid 1px lightseagreen;
+    color: white;
+}
+
+#stop button:focus {
+    outline:none;
+}
+
 .play-button {
     border: none;
     background: black;
     color: #ffffff;
     font-weight: 700;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     font-size: 1.6em;
-    padding: 15px;
+    padding: 15px 25px;
     text-transform: uppercase;
     display: inline-block;
     transition: all 0.3s ease 0s;
     cursor: pointer;
+    margin: 5%;
     }
 
 .play-button:hover{
     color: #404040;
     font-weight: 700;
-    letter-spacing: 8px;
+    letter-spacing: 10px;
     background: none;
     -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
     -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
@@ -105,43 +135,31 @@ p {
 }
 
 .box {
-    height: 35px;
+    height: 30px;
     border: solid 1px silver;
 }
 
 #container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: stretch;
     align-content: center;
     align-items: center;
-    height: 250px;
     flex-wrap: wrap;
+    margin: 2%;
     }
 
 .part {
-    align-self: auto;
+    align-self: flex-start;
     width: 20%;
     }
 
 .game-part {
-    align-self: auto;
-    width: 55%;
-    }
-
-#card-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    padding: 0;
-    }
+    align-self: stretch;
+    width: 60%;
+}
 
 .card {
-    order: 0;
-    flex: 0 1 auto;
     align-self: center;
     margin: 5px;
     padding: 0;
@@ -181,4 +199,13 @@ p {
 
 .red {
     color: red;
+}
+
+.inline {
+    display: inline;
+}
+
+footer {
+    background-color: whitesmoke;
+    padding: 2%;
 }
