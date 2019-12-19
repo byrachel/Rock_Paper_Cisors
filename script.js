@@ -26,11 +26,13 @@ getRandomItem = () => {
     return desktopChoice;
 }
 
-// Variables des scores
+// Variables des scores accumulés
 let player1Score = 0;
 let player2Score = 0;
-
-// Vérifier si une partie est en cours
+// Variables des scores de la partie
+let player1Point = 0;
+let player2Point = 0;
+// Variable pour vérifier si une partie est en cours
 let alreadyPlaying = false;
 
 // Afficher le bouton "stop this game"
@@ -41,7 +43,6 @@ stopThisGameButton = () => {
 
 // Sélection du type de jeu
 gameSelection = (choice) => {
-
     if(choice === 'desktopOnly' && alreadyPlaying === false) {
         gameChoice = 'desktopOnly';
         alreadyPlaying = true;
@@ -50,7 +51,6 @@ gameSelection = (choice) => {
         GameDiv.innerHTML = '<h3>Desktop v/s Desktop</h3><p>_</p><p>Click "play" when you are ready.</p><br /><button onclick="playGameDesktopOnly()" class="play-button" >Play</button>';
         // Ajout du bouton STOP
         stopThisGameButton();
-        return gameChoice;
     }
     else if(choice === 'desktopOnly' && alreadyPlaying === true) {
         // Message d'alerte -> Stopper le jeu avant de changer de type de jeu
@@ -66,7 +66,6 @@ gameSelection = (choice) => {
         GameDiv.innerHTML = '<h3>Human v/s Desktop</h3><p>_</p><h4 class="center">Which item do you want to play ?</h4><p>Rock, paper or cisorcs ?</p><p>Click on a picture, then on the play button.</p><p>Good luck !</p><br /><button onclick="playGameHumanVsDesktop()" class="play-button">Play</button><br />';
         // Ajout du bouton STOP
         stopThisGameButton();
-        return gameChoice;
     }
     else if(choice === 'humanVsDesktop' && alreadyPlaying === true) {
         // Message d'alerte -> Stopper le jeu avant de changer de type de jeu
@@ -96,18 +95,20 @@ playGameHumanVsDesktop = () => {
     getScore(player1,player2);
     displaySelectedItems(player1,player2);
     displayScores(player1Score,player2Score);
-    console.log('Player 1 score : ' + player1Score  + 'Player 2 score : ' + player2Score);
+    // Insertion du message d'encouragement
+    phrase(player1Point,player2Point);
+    console.log('Partie en cours : P1:' + player1Point + ' P2: ' + player2Point + '- Scores P1: ' + player1Score  + 'P2 : ' + player2Score);
 }
 
 // Insertion des scores dans le DOM
-displayScores = (player1Score,player2Score) => {
+displayScores = () => {
     if(player1Score>=0 && player2Score>=0) {
         // Score player 1
         let scoreOne = document.getElementById('score-one');
-        scoreOne.innerHTML = '<p class="center">' + player1Score + '</p>';
+        scoreOne.innerHTML = '<h3 class="center">' + player1Score + '</h3>';
         // Score player 2
         let scoreTwo = document.getElementById('score-two');
-        scoreTwo.innerHTML = '<p class="center">' + player2Score + '</p>';
+        scoreTwo.innerHTML = '<h3 class="center">' + player2Score + '</h3>';
     }
     else {
         console.log('Error : no score to display.');
@@ -115,9 +116,10 @@ displayScores = (player1Score,player2Score) => {
 }
 
 // Règles du jeu
-
 getScore = (player1,player2) => {
-    if(player1 === player2) {
+    if(player1 == player2) {
+        player1Point = 0;
+        player2Point = 0;
         console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
     }
     else {
@@ -125,30 +127,41 @@ getScore = (player1,player2) => {
             case 'rock' :
                 if(player2 === 'paper') {
                     player2Score +=1;
+                    player1Point = 0;
+                    player2Point = 1;
                     console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
                 } else if(player2 === 'cisors') {
                     player1Score +=1;
+                    player1Point =1;
+                    player2Point = 0;
                     console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-
                 }
                 break;
             case 'paper' :
                 if(player2 === 'cisors') {
                     player2Score +=1;
+                    player1Point = 0;
+                    player2Point = 1;
                     console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
                 }
                 else if(player2 === 'rock') {
                     player1Score +=1;
+                    player1Point = 1;
+                    player2Point = 0;
                     console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
                 }
                 break;
             case 'cisors' :
                 if(player2 === 'paper') {
                     player1Score +=1;
+                    player1Point = 1;
+                    player2Point = 0;
                     console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
                 }
                 else if(player2 === 'rock') {
                     player2Score +=1;
+                    player1Point = 0;
+                    player2Point = 1;
                     console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
                 }
                 break;
@@ -159,9 +172,24 @@ getScore = (player1,player2) => {
     }
 }
 
-// Affichage des items sélectionnés
-displaySelectedItems = (player1,player2) => {
+// Ajout de petites phrases de motivation
+phrase = (player1Point,player2Point) => {
+    if(player1Point>player2Point) {
+        let winner = document.getElementById('motivation');
+        winner.innerHTML = '<p class="motivation-phrase">Great, you win !</p>';
+    }
+    else if(player1Point<player2Point) {
+        let looser = document.getElementById('motivation');
+        looser.innerHTML = '<p class="motivation-phrase">Oups, you loose. Choose another item !</p>';
+    }
+    else if(player1Point === player2Point) {
+        let tryAgain = document.getElementById('motivation');
+        tryAgain.innerHTML = '<p class="motivation-phrase">No winner. Try again :)</p>';
+    }
+}
 
+// Affichage des items sélectionnés dans le bloc "Game"
+displaySelectedItems = (player1,player2) => {
     if((player1 === 'rock') || (player1 === 'paper') || (player1 === 'cisors')) {
         let itemsSelected = document.getElementById('item-selected');
         itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
@@ -172,7 +200,7 @@ displaySelectedItems = (player1,player2) => {
     }
 }
 
-
+// Reload la page / Mise à zéro des scores
 stopGame = () => {
     window.location.reload();
 }

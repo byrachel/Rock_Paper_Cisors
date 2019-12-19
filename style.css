@@ -212,6 +212,11 @@ footer {
 }
 
 #item-selected {
-    height: 80px;
+    height: 100px;
     padding: 10px 0;
+}
+
+.motivation-phrase {
+    color: lightseagreen;
+    font-size: 0.8em;
 }
