@@ -8,7 +8,7 @@ let playerItem = getPlayerChoice = playerChoice => {
 // Fonction pour définir le choix automatique (desktop)
 getRandomItem = () => {
     let desktopChoice = Math.floor(Math.random()*Math.floor(3));
-    console.log('randomItem : ' + desktopChoice);
+    console.log('randomNumber : ' + desktopChoice);
     switch(desktopChoice) {
         case 0 :
             desktopChoice = 'rock';
@@ -38,10 +38,10 @@ let alreadyPlaying = false;
 // Afficher le bouton "stop this game"
 stopThisGameButton = () => {
     let stopButton = document.getElementById('stop');
-    stopButton.innerHTML = '<button onclick="stopGame()">Stop this game</button></div>';
+    stopButton.innerHTML = '<button onclick="stopGame()" class="game-button">Stop this game</button></div>';
 }
 
-// Sélection du type de jeu
+// Sélection du type de jeu avec un filtre vérifiant si une partie est en cours
 gameSelection = (choice) => {
     if(choice === 'desktopOnly' && alreadyPlaying === false) {
         gameChoice = 'desktopOnly';
@@ -53,7 +53,7 @@ gameSelection = (choice) => {
         stopThisGameButton();
     }
     else if(choice === 'desktopOnly' && alreadyPlaying === true) {
-        // Message d'alerte -> Stopper le jeu avant de changer de type de jeu
+        // Message d'alerte -> Etes-vous sure de vouloir quitter cette partie ?
         let alert = document.getElementById('alert');
         alert.innerHTML = '<p class="red center">Do you want to quit this game ?</p><p class="red center"> Click "Stop this game" or continue.</p><br />';
     }
@@ -68,36 +68,71 @@ gameSelection = (choice) => {
         stopThisGameButton();
     }
     else if(choice === 'humanVsDesktop' && alreadyPlaying === true) {
-        // Message d'alerte -> Stopper le jeu avant de changer de type de jeu
+        // Message d'alerte -> Etes-vous sure de vouloir quitter cette partie ?
         let alert = document.getElementById('alert');
         alert.innerHTML = '<p class="red center">Do you want to quit this game ?</p><p class="red center"> Click "Stop this game" or continue.</p><br />';
     }
     else {
         console.log('Error : gameChoice')
     }
-    console.log('gameSelection : ' + gameChoice)
 }
 
-// Lancer le jeu : Desktop Only
-playGameDesktopOnly = () => {
-    let player1 = getRandomItem();
-    let player2 = getRandomItem();
-        getScore(player1,player2);
-        displaySelectedItems(player1,player2);
-        displayScores(player1Score,player2Score);
-        console.log('Player1 score : ' + player1Score  + '-' + 'Player2 score : ' + player2Score)
-}
-
-// Lancer le jeu : Desktop Vs Human
-playGameHumanVsDesktop = () => {
-    let player1 = playerItem;
-    let player2 = getRandomItem();
-    getScore(player1,player2);
-    displaySelectedItems(player1,player2);
-    displayScores(player1Score,player2Score);
-    // Insertion du message d'encouragement
-    phrase(player1Point,player2Point);
-    console.log('Partie en cours : P1:' + player1Point + ' P2: ' + player2Point + '- Scores P1: ' + player1Score  + 'P2 : ' + player2Score);
+// Règles du jeu
+getScore = (player1,player2) => {
+    // En cas d'égalité :
+    if(player1 == player2) {
+        player1Point = 0;
+        player2Point = 0;
+        console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+    }
+    else {
+        switch(player1) {
+            case 'rock' :
+                if(player2 === 'paper') {
+                    player2Score +=1;
+                    player1Point = 0;
+                    player2Point = 1;
+                    console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                } else if(player2 === 'cisors') {
+                    player1Score +=1;
+                    player1Point =1;
+                    player2Point = 0;
+                    console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                }
+                break;
+            case 'paper' :
+                if(player2 === 'cisors') {
+                    player2Score +=1;
+                    player1Point = 0;
+                    player2Point = 1;
+                    console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                }
+                else if(player2 === 'rock') {
+                    player1Score +=1;
+                    player1Point = 1;
+                    player2Point = 0;
+                    console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                }
+                break;
+            case 'cisors' :
+                if(player2 === 'paper') {
+                    player1Score +=1;
+                    player1Point = 1;
+                    player2Point = 0;
+                    console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                }
+                else if(player2 === 'rock') {
+                    player2Score +=1;
+                    player1Point = 0;
+                    player2Point = 1;
+                    console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                }
+                break;
+            default:
+                console.log('Please, select a card.');
+        }
+    
+    }
 }
 
 // Insertion des scores dans le DOM
@@ -115,89 +150,62 @@ displayScores = () => {
     }
 }
 
-// Règles du jeu
-getScore = (player1,player2) => {
-    if(player1 == player2) {
-        player1Point = 0;
-        player2Point = 0;
-        console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-    }
-    else {
-        switch(player1) {
-            case 'rock' :
-                if(player2 === 'paper') {
-                    player2Score +=1;
-                    player1Point = 0;
-                    player2Point = 1;
-                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-                } else if(player2 === 'cisors') {
-                    player1Score +=1;
-                    player1Point =1;
-                    player2Point = 0;
-                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-                }
-                break;
-            case 'paper' :
-                if(player2 === 'cisors') {
-                    player2Score +=1;
-                    player1Point = 0;
-                    player2Point = 1;
-                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-                }
-                else if(player2 === 'rock') {
-                    player1Score +=1;
-                    player1Point = 1;
-                    player2Point = 0;
-                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-                }
-                break;
-            case 'cisors' :
-                if(player2 === 'paper') {
-                    player1Score +=1;
-                    player1Point = 1;
-                    player2Point = 0;
-                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-                }
-                else if(player2 === 'rock') {
-                    player2Score +=1;
-                    player1Point = 0;
-                    player2Point = 1;
-                    console.log('Player 1 : ' + player1 + '-' + player1Score + ' - Player 2 : ' + player2 + '-' + player2Score)
-                }
-                break;
-            default:
-                console.log('Please, select a card.');
-        }
-    
-    }
-}
-
-// Ajout de petites phrases de motivation
-phrase = (player1Point,player2Point) => {
-    if(player1Point>player2Point) {
-        let winner = document.getElementById('motivation');
-        winner.innerHTML = '<p class="motivation-phrase">Great, you win !</p>';
-    }
-    else if(player1Point<player2Point) {
-        let looser = document.getElementById('motivation');
-        looser.innerHTML = '<p class="motivation-phrase">Oups, you loose. Choose another item !</p>';
-    }
-    else if(player1Point === player2Point) {
-        let tryAgain = document.getElementById('motivation');
-        tryAgain.innerHTML = '<p class="motivation-phrase">No winner. Try again :)</p>';
-    }
-}
-
 // Affichage des items sélectionnés dans le bloc "Game"
 displaySelectedItems = (player1,player2) => {
     if((player1 === 'rock') || (player1 === 'paper') || (player1 === 'cisors')) {
         let itemsSelected = document.getElementById('item-selected');
         itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
     }
+    // Un message d'erreur si aucune carte n'est sélectionnée
     else {
         let itemAlert = document.getElementById('alert')
         itemAlert.innerHTML = '<h2 class="red center">Oups ! Select an item to start the game.</h2>';
     }
+}
+
+// Ajout de petites phrases de motivation pour le jeu Human V/s Desktop - Sur la manche en cours (et non le total des parties)
+phrase = (player1Point,player2Point) => {
+    // Si Human gagne
+    if(player1Point>player2Point) {
+        let winner = document.getElementById('motivation');
+        winner.innerHTML = '<p class="motivation-phrase">Great, you win !</p>';
+    }
+    // Si Human perd
+    else if(player1Point<player2Point) {
+        let looser = document.getElementById('motivation');
+        looser.innerHTML = '<p class="motivation-phrase">Oups, you loose. Choose another item !</p>';
+    }
+    // En cas de match nul
+    else if(player1Point === player2Point) {
+        let tryAgain = document.getElementById('motivation');
+        tryAgain.innerHTML = '<p class="motivation-phrase">No winner. Try again :)</p>';
+    }
+}
+
+// Lancer le jeu : Desktop Only
+playGameDesktopOnly = () => {
+    // Définition des joueurs
+    let player1 = getRandomItem();
+    let player2 = getRandomItem();
+    // Fonctions : Règle du jeu + Affichage des items + affichage des scores
+    getScore(player1,player2);
+    displaySelectedItems(player1,player2);
+    displayScores(player1Score,player2Score);
+    console.log('Player1 score : ' + player1Score  + ' - ' + 'Player2 score : ' + player2Score)
+}
+
+// Lancer le jeu : Desktop Vs Human
+playGameHumanVsDesktop = () => {
+    // Définition des joueurs
+    let player1 = playerItem;
+    let player2 = getRandomItem();
+    // Fonctions : Règle du jeu + Affichage des items + affichage des scores
+    getScore(player1,player2);
+    displaySelectedItems(player1,player2);
+    displayScores(player1Score,player2Score);
+    // Insertion d'un message d'encouragement
+    phrase(player1Point,player2Point);
+    console.log('Partie en cours : Human:' + player1Point + ' Desktop: ' + player2Point + ' - Scores Human: ' + player1Score  + 'Desktop : ' + player2Score);
 }
 
 // Reload la page / Mise à zéro des scores

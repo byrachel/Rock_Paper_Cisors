@@ -6,9 +6,10 @@
   <title>Rock - Paper - Cisors</title>
 </head>
 <body>
+
   <header>
     <h1 class="center">Rock Paper Cisors</h1>
-    <h2 class="center slogan">Let's have some fun</h2>
+    <h2 class="center">- Let's have some fun -</h2>
   </header>
 
   <div class="container-header">
@@ -16,17 +17,18 @@
       <p>First, choose your game :</p>
     </div>
     <div class="game-selection">
-      <button onclick="gameSelection('desktopOnly')">Desktop Only</button>
-      <button onclick="gameSelection('humanVsDesktop')">Human Vs Desktop</button>
+      <button onclick="gameSelection('desktopOnly')" class="game-button">Desktop Only</button>
+      <button onclick="gameSelection('humanVsDesktop')" class="game-button">Human Vs Desktop</button>
     </div>
   </div>
 
   <div id="container">
     <div class="part">
-      <h2 class="uppercase">Game :</h2>
+      <h2 class="uppercase">Game</h2>
       <div id="motivation"></div>
       <div id="item-selected"></div>
-      <h2 class="uppercase">Scores :</h2>
+      <br />
+      <h2 class="uppercase">Scores</h2>
       <p class="center inline">Player 1</p> <div id="score-one" class="box"></div>
       <br />
       <p class="center inline">Player 2</p><div id="score-two" class="box"></div>
@@ -38,35 +40,41 @@
       <div id="alert"></div>
       <div id="game-space" class="center">
         
-        <h3>How it works ?</h3>
-        <h4 class="center">You've got 2 possibilities :</h4>
+        <h2 class="uppercase">How it works</h2>
+        <p>2 possibilities:</p>
         <br />
-        <p><strong>You want to see desktops playing randomly ?</strong></p>
-        <p>Choose "desktop only".</p>
-        <br />
-        <p><strong>You want to fight the desktop ?</strong></p>
-        <p>Choose "Human v/s Desktop" and choose an item.</p>
-        <br />
-        <h3>Good luck</h3>
+        <p class="bold">You want to see desktops playing randomly ?</p>
+        <button onclick="gameSelection('desktopOnly')" class="game-button-2">Desktop Only</button>
+        <p>or</p>
+        <p class="bold">You want to fight the desktop ?</p>
+        <button onclick="gameSelection('humanVsDesktop')" class="game-button-2">Human Vs Desktop</button>
+        <h2><br />Good luck</h2>
+        <h2>:)</h2>
       </div>
     </div>
 
     <div class="part">
       <div class="card">
-        <button onclick="getPlayerChoice('rock')" class="button-card"><img src="img/pierre.png" class="img-card" /></button>
+      <h2 class="uppercase">Items :</h2>
       </div>
-      <div class="card">
-         <button onclick="getPlayerChoice('paper')" class="button-card" ><img src="img/feuille.png" class="img-card"/></button>
-      </div>
-      <div class="card">
-          <button onclick="getPlayerChoice('cisors')"class="button-card" ><img src="img/ciseau.png" class="img-card"/></button>
+      <div class="card-container">
+        <div class="card">
+          <button onclick="getPlayerChoice('rock')" class="button-card"><img src="img/rock.png" class="img-card" /></button>
+        </div>
+        <div class="card">
+          <button onclick="getPlayerChoice('paper')" class="button-card" ><img src="img/paper.png" class="img-card"/></button>
+        </div>
+        <div class="card">
+            <button onclick="getPlayerChoice('cisors')"class="button-card" ><img src="img/cisors.png" class="img-card"/></button>
+        </div>
       </div>
     </div>
 
   </div>
   <footer>
-    <p class="center">Realised by Rachel Nething - HTML / CSS / Javascript Vanilla</p>
+    <p class="center">by Rachel Nething - HTML / CSS / Javascript Vanilla</p>
   </footer>
+
 </body>
 <script src="script.js"></script>
 </html>

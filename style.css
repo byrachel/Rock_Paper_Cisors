@@ -1,8 +1,10 @@
 body {
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    margin : 0;
 }  
+
 header {
-    margin: 4%;
+    margin: 3%;
 }
 .container-header {
     display: flex;
@@ -12,48 +14,37 @@ header {
     align-content: flex-start;
     align-items: flex-start;
     background-color: whitesmoke;
-    padding: 2%;
+    padding: 1% 2%;
 }
 
 h1 {
     text-transform: uppercase;
-    letter-spacing: 5px;
+    letter-spacing: 6px;
     font-weight: 700;
-    font-size: 1em;
+    font-size: 1.3em;
     }
 
 h2 {
-    font-weight: 700;
-    font-size: 0.7em;
-    letter-spacing: 2px;
+    font-weight: 300;
+    font-size: 1em;
+    letter-spacing: 7px;
+    color: silver;
+    padding: 5px 0;
 }
 
 h3 {
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 0.8em;
+    font-weight: 300;
+    font-size: 1.2em;
     letter-spacing: 5px;
     color: lightseagreen ;
-}
-
-h4 {
-    font-weight: 300;
-    font-size: 1em;
-    color: silver;
-    letter-spacing: 2px;
-}
-
-.slogan {
-    font-weight: 300;
-    font-size: 0.8em;
-    letter-spacing: 5px;
-    color: silver;
+    text-transform: uppercase;
 }
 
 p {
     font-weight: 300;
-    font-size: 0.7em;
-    letter-spacing: 2px;
+    font-size: 0.8em;
+    letter-spacing: 3px;
+    padding: 5px 0;
 }
 
 .game-selection {
@@ -62,27 +53,52 @@ p {
     align-self: center;
     }
 
-.game-selection button {
+.game-button {
     border-radius: 0%;
     border: solid 1px silver;
-    padding: 8px;
-    margin: 4px;
-    font-size: 0.7em;
+    padding: 10px;
+    margin: 5px;
+    font-size: 0.8em;
+    color: grey;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    background-color: whitesmoke;
+    background-color: white;
 }
 
-.game-selection button:hover {
+.game-button:hover {
     background-color: lightseagreen ;
     border: solid 1px lightseagreen;
     color: white;
 }
 
-.game-selection button:focus {
+.game-button:focus {
     outline: none;
 }
+
+.game-button-2 {
+    border-radius: 0%;
+    padding: 10px;
+    margin: 5px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background-color: lightseagreen ;
+    border: solid 1px lightseagreen;
+    color: white;
+}
+
+.game-button-2:hover {
+    background-color: white;
+    border: solid 1px silver;
+    color: grey;
+}
+
+.game-button-2:focus {
+    outline: none;
+}
+
 
 #stop button {
     border-radius: 0%;
@@ -136,8 +152,9 @@ p {
 }
 
 .box {
-    height: 30px;
+    height: 55px;
     border: solid 1px silver;
+    margin: 10px 0;
 }
 
 #container {
@@ -152,17 +169,18 @@ p {
 
 .part {
     align-self: flex-start;
-    width: 20%;
+    flex-wrap: wrap;
+    width: 15%;
     }
 
 .game-part {
-    align-self: stretch;
-    width: 60%;
+    align-self: auto;
+    flex-wrap: wrap;
+    width: 70%;
 }
 
 .card {
-    align-self: center;
-    margin: 5px;
+    margin: 10px;
     padding: 0;
     }
     
@@ -171,7 +189,7 @@ p {
 }
 
 .button-card:hover {
-    border: solid 1px black;
+    background-color: whitesmoke;
 }
 
 .button-card:focus {
@@ -181,9 +199,6 @@ p {
 
 .img-card {
     width: 125px;
-    background-color: white;
-    margin: 0;
-    padding: 0;
 }
 
 .center {
@@ -219,4 +234,34 @@ footer {
 .motivation-phrase {
     color: lightseagreen;
     font-size: 0.8em;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media all and (max-width: 800px) {
+
+    #container {
+        flex-direction: column;
+        justify-content: center;
+    }
+    .part {
+        align-self: center;
+        flex-wrap: wrap;
+        width: 95%;
+        order: 1;
+        }
+    .game-part {
+        align-self: auto;
+        flex-wrap: wrap;
+        width: 95%;
+        order: 0;
+    }
+
+    .card-container {
+        flex-direction: row;
+    }
 }
