@@ -169,13 +169,13 @@ displaySelectedItems = (gameChoice, player1, player2) => {
             rockItem.innerHTML = '<img src="img/rock.png" class="img-card" />'
         }
         else if(player1 === 'paper') {
-            let itemsSelected = document.getElementById('item-selected');
+            itemsSelected = document.getElementById('item-selected');
             itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
             paperItem = document.getElementById('paper-item');
             paperItem.innerHTML = '<img src="img/paper.png" class="img-card" />'
         }
         else if(player1 === 'cisors') {
-            let itemsSelected = document.getElementById('item-selected');
+            itemsSelected = document.getElementById('item-selected');
             itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
             cisorsItem = document.getElementById('cisors-item');
             cisorsItem.innerHTML = '<img src="img/cisors.png" class="img-card" />'
@@ -184,7 +184,15 @@ displaySelectedItems = (gameChoice, player1, player2) => {
         else {
             alert('Oups ! Select an item to start the game')
         }
-}
+    }
+
+    else if(gameChoice === 'desktopOnly') {
+        itemsSelected = document.getElementById('item-selected');
+        itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
+    }
+    else {
+        console.log('displaySelectItem not working')
+    }
 }
 
 // Ajout de petites phrases de motivation pour le jeu Human V/s Desktop - Sur la manche en cours (et non le total des parties)
@@ -213,7 +221,7 @@ playGameDesktopOnly = () => {
     let player2 = getRandomItem();
     // Fonctions : Règle du jeu + Affichage des items + affichage des scores
     getScore(player1,player2);
-    displaySelectedItems(player1,player2);
+    displaySelectedItems(gameChoice,player1,player2);
     displayScores(player1Score,player2Score);
     console.log('Player1 score : ' + player1Score  + ' - ' + 'Player2 score : ' + player2Score)
 }
