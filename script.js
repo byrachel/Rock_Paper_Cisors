@@ -3,7 +3,25 @@
 let playerItem = getPlayerChoice = playerChoice => {
     playerItem = playerChoice;
     console.log('getPlayerChoice : ' + playerItem);
-    return playerItem;
+    let rockItem = document.getElementById('rock-item');
+    rockItem.innerHTML = '<img src="img/rock-1.png" class="img-card" />'
+    let paperItem = document.getElementById('paper-item');
+    paperItem.innerHTML = '<img src="img/paper-1.png" class="img-card" />'
+    let cisorsItem = document.getElementById('cisors-item');
+    cisorsItem.innerHTML = '<img src="img/cisors-1.png" class="img-card" />'
+
+    if(playerItem === 'rock') {
+        rockItem = document.getElementById('rock-item');
+        rockItem.innerHTML = '<img src="img/rock.png" class="img-card" />'
+    }
+    else if(playerItem === 'paper') {
+        paperItem = document.getElementById('paper-item');
+        paperItem.innerHTML = '<img src="img/paper.png" class="img-card" />'
+    }
+    else if(playerItem === 'cisors') {
+        cisorsItem = document.getElementById('cisors-item');
+        cisorsItem.innerHTML = '<img src="img/cisors.png" class="img-card" />'
+    }
 }
 
 // Fonction pour définir le choix automatique (desktop)
@@ -155,30 +173,17 @@ displayScores = () => {
 displaySelectedItems = (gameChoice, player1, player2) => {
 
     if(gameChoice === 'humanVsDesktop') {
-        let rockItem = document.getElementById('rock-item');
-        rockItem.innerHTML = '<img src="img/rock-1.png" class="img-card" />'
-        let paperItem = document.getElementById('paper-item');
-        paperItem.innerHTML = '<img src="img/paper-1.png" class="img-card" />'
-        let cisorsItem = document.getElementById('cisors-item');
-        cisorsItem.innerHTML = '<img src="img/cisors-1.png" class="img-card" />'
-
         if(player1 === 'rock') {
             let itemsSelected = document.getElementById('item-selected');
             itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
-            rockItem = document.getElementById('rock-item');
-            rockItem.innerHTML = '<img src="img/rock.png" class="img-card" />'
         }
         else if(player1 === 'paper') {
             itemsSelected = document.getElementById('item-selected');
             itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
-            paperItem = document.getElementById('paper-item');
-            paperItem.innerHTML = '<img src="img/paper.png" class="img-card" />'
         }
         else if(player1 === 'cisors') {
             itemsSelected = document.getElementById('item-selected');
             itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
-            cisorsItem = document.getElementById('cisors-item');
-            cisorsItem.innerHTML = '<img src="img/cisors.png" class="img-card" />'
         }
         // Message d'erreur si aucune carte n'est sélectionnée
         else {

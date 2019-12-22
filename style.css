@@ -186,10 +186,17 @@ p {
     
 .button-card {
     border: solid 1px silver;
+    cursor: pointer;
 }
 
 .button-card:hover {
     background-color: whitesmoke;
+    border: solid 3px lightseagreen;
+}
+
+.button-card:active {
+    background-color: whitesmoke;
+    border: solid 3px lightseagreen;
 }
 
 .button-card:focus {
@@ -199,11 +206,6 @@ p {
 
 .img-card {
     width: 125px;
-}
-
-.img-card-selected {
-    width: 125px;
-    border: solid 3px lightseagreen;
 }
 
 .center {
