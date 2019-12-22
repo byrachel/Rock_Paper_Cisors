@@ -201,6 +201,11 @@ p {
     width: 125px;
 }
 
+.img-card-selected {
+    width: 125px;
+    border: solid 3px lightseagreen;
+}
+
 .center {
     text-align: center;
 }

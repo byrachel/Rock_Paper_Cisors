@@ -3,6 +3,7 @@
 let playerItem = getPlayerChoice = playerChoice => {
     playerItem = playerChoice;
     console.log('getPlayerChoice : ' + playerItem);
+    return playerItem;
 }
 
 // Fonction pour définir le choix automatique (desktop)
@@ -80,7 +81,7 @@ gameSelection = (choice) => {
 // Règles du jeu
 getScore = (player1,player2) => {
     // En cas d'égalité :
-    if(player1 == player2) {
+    if(player1 === player2) {
         player1Point = 0;
         player2Point = 0;
         console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
@@ -151,16 +152,39 @@ displayScores = () => {
 }
 
 // Affichage des items sélectionnés dans le bloc "Game"
-displaySelectedItems = (player1,player2) => {
-    if((player1 === 'rock') || (player1 === 'paper') || (player1 === 'cisors')) {
-        let itemsSelected = document.getElementById('item-selected');
-        itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
-    }
-    // Un message d'erreur si aucune carte n'est sélectionnée
-    else {
-        let itemAlert = document.getElementById('alert')
-        itemAlert.innerHTML = '<h2 class="red center">Oups ! Select an item to start the game.</h2>';
-    }
+displaySelectedItems = (gameChoice, player1, player2) => {
+
+    if(gameChoice === 'humanVsDesktop') {
+        let rockItem = document.getElementById('rock-item');
+        rockItem.innerHTML = '<img src="img/rock-1.png" class="img-card" />'
+        let paperItem = document.getElementById('paper-item');
+        paperItem.innerHTML = '<img src="img/paper-1.png" class="img-card" />'
+        let cisorsItem = document.getElementById('cisors-item');
+        cisorsItem.innerHTML = '<img src="img/cisors-1.png" class="img-card" />'
+
+        if(player1 === 'rock') {
+            let itemsSelected = document.getElementById('item-selected');
+            itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
+            rockItem = document.getElementById('rock-item');
+            rockItem.innerHTML = '<img src="img/rock.png" class="img-card" />'
+        }
+        else if(player1 === 'paper') {
+            let itemsSelected = document.getElementById('item-selected');
+            itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
+            paperItem = document.getElementById('paper-item');
+            paperItem.innerHTML = '<img src="img/paper.png" class="img-card" />'
+        }
+        else if(player1 === 'cisors') {
+            let itemsSelected = document.getElementById('item-selected');
+            itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
+            cisorsItem = document.getElementById('cisors-item');
+            cisorsItem.innerHTML = '<img src="img/cisors.png" class="img-card" />'
+        }
+        // Message d'erreur si aucune carte n'est sélectionnée
+        else {
+            alert('Oups ! Select an item to start the game')
+        }
+}
 }
 
 // Ajout de petites phrases de motivation pour le jeu Human V/s Desktop - Sur la manche en cours (et non le total des parties)
@@ -201,7 +225,7 @@ playGameHumanVsDesktop = () => {
     let player2 = getRandomItem();
     // Fonctions : Règle du jeu + Affichage des items + affichage des scores
     getScore(player1,player2);
-    displaySelectedItems(player1,player2);
+    displaySelectedItems(gameChoice,player1,player2);
     displayScores(player1Score,player2Score);
     // Insertion d'un message d'encouragement
     phrase(player1Point,player2Point);
