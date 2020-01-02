@@ -26,9 +26,10 @@ let playerItem = getPlayerChoice = playerChoice => {
 
 // Fonction pour définir le choix automatique (desktop)
 getRandomItem = () => {
-    let desktopChoice = Math.floor(Math.random()*Math.floor(3));
-    console.log('randomNumber : ' + desktopChoice);
-    switch(desktopChoice) {
+    let randomChoice = Math.floor(Math.random()*Math.floor(3));
+    let desktopChoice;
+    console.log('randomNumber : ' + randomChoice);
+    switch(randomChoice) {
         case 0 :
             desktopChoice = 'rock';
             break;
@@ -102,7 +103,8 @@ getScore = (player1,player2) => {
     if(player1 === player2) {
         player1Point = 0;
         player2Point = 0;
-        console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+        console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score);
+        return 'match nul';   
     }
     else {
         switch(player1) {
@@ -111,7 +113,7 @@ getScore = (player1,player2) => {
                     player2Score +=1;
                     player1Point = 0;
                     player2Point = 1;
-                    console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                    console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)             
                 } else if(player2 === 'cisors') {
                     player1Score +=1;
                     player1Point =1;
