@@ -1,0 +1,19 @@
+{
+  "name": "rock_paper_cisors",
+  "version": "1.0.0",
+  "description": "Game",
+  "main": "index.html",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byrachel/Rock_Paper_Cisors.git"
+  },
+  "author": "Rachel Nething",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/byrachel/Rock_Paper_Cisors/issues"
+  },
+  "homepage": "https://github.com/byrachel/Rock_Paper_Cisors#readme"
+}
