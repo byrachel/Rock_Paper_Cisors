@@ -114,11 +114,13 @@ getScore = (player1,player2) => {
                     player1Point = 0;
                     player2Point = 1;
                     console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)             
+                    return('the winner is player 2')
                 } else if(player2 === 'cisors') {
                     player1Score +=1;
                     player1Point =1;
                     player2Point = 0;
                     console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                    return('the winner is player 1')
                 }
                 break;
             case 'paper' :
@@ -127,12 +129,14 @@ getScore = (player1,player2) => {
                     player1Point = 0;
                     player2Point = 1;
                     console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                    return('the winner is player 2')
                 }
                 else if(player2 === 'rock') {
                     player1Score +=1;
                     player1Point = 1;
                     player2Point = 0;
                     console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                    return('the winner is player 1')
                 }
                 break;
             case 'cisors' :
@@ -141,12 +145,14 @@ getScore = (player1,player2) => {
                     player1Point = 1;
                     player2Point = 0;
                     console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                    return('the winner is player 1')
                 }
                 else if(player2 === 'rock') {
                     player2Score +=1;
                     player1Point = 0;
                     player2Point = 1;
                     console.log('Player 1 : ' + player1 + ' - ' + player1Score + ' - Player 2 : ' + player2 + ' - ' + player2Score)
+                    return('the winner is player 2')
                 }
                 break;
             default:
