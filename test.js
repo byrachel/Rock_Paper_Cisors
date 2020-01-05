@@ -1,9 +1,10 @@
-// Import de la librairie assert
+// Import de la librairie assert & expect
 let assert = require('assert');
 
 // Import du fichier à tester
 let script = require('./script');
 
+// Vérifier les règles du jeu
 describe('same items', () => {
     it('should return match nul', () => {
         assert.equal(getScore('paper','paper'), 'match nul');
@@ -27,3 +28,4 @@ describe('Game', () => {
         assert.equal(getScore('cisors','rock'), 'the winner is player 2');
     });
 });
+

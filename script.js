@@ -1,31 +1,27 @@
 
-// Fonction pour définir le choix du joueur en fonction de son click
-let playerItem = getPlayerChoice = playerChoice => {
+// Fonction pour définir le choix du joueur selon son click
+let playerItem = getPlayerChoice = (playerChoice) => {
     playerItem = playerChoice;
     console.log('getPlayerChoice : ' + playerItem);
-    let rockItem = document.getElementById('rock-item');
-    rockItem.innerHTML = '<img src="img/rock-1.png" class="img-card" />'
-    let paperItem = document.getElementById('paper-item');
-    paperItem.innerHTML = '<img src="img/paper-1.png" class="img-card" />'
-    let cisorsItem = document.getElementById('cisors-item');
-    cisorsItem.innerHTML = '<img src="img/cisors-1.png" class="img-card" />'
+    let rockItem = document.getElementById('rock-item').innerHTML = '<img src="img/rock-1.png" class="img-card" />';
+    let paperItem = document.getElementById('paper-item').innerHTML = '<img src="img/paper-1.png" class="img-card" />';
+    let cisorsItem = document.getElementById('cisors-item').innerHTML = '<img src="img/cisors-1.png" class="img-card" />';
 
     if(playerItem === 'rock') {
-        rockItem = document.getElementById('rock-item');
-        rockItem.innerHTML = '<img src="img/rock.png" class="img-card" />'
+        rockItem = document.getElementById('rock-item').innerHTML = '<img src="img/rock.png" class="img-card" />';
     }
     else if(playerItem === 'paper') {
-        paperItem = document.getElementById('paper-item');
-        paperItem.innerHTML = '<img src="img/paper.png" class="img-card" />'
+        paperItem = document.getElementById('paper-item').innerHTML = '<img src="img/paper.png" class="img-card" />';
     }
     else if(playerItem === 'cisors') {
-        cisorsItem = document.getElementById('cisors-item');
-        cisorsItem.innerHTML = '<img src="img/cisors.png" class="img-card" />'
+        cisorsItem = document.getElementById('cisors-item').innerHTML = '<img src="img/cisors.png" class="img-card" />';
     }
 }
 
+
 // Fonction pour définir le choix automatique (desktop)
 getRandomItem = () => {
+    // Retourne aléatoirement un chiffre entre 0 et 2.
     let randomChoice = Math.floor(Math.random()*Math.floor(3));
     let desktopChoice;
     console.log('randomNumber : ' + randomChoice);
@@ -57,8 +53,7 @@ let alreadyPlaying = false;
 
 // Afficher le bouton "stop this game"
 stopThisGameButton = () => {
-    let stopButton = document.getElementById('stop');
-    stopButton.innerHTML = '<button onclick="stopGame()" class="game-button">Stop this game</button></div>';
+    let stopButton = document.getElementById('stop').innerHTML = '<button onclick="stopGame()" class="game-button">Stop this game</button></div>';
 }
 
 // Sélection du type de jeu avec un filtre vérifiant si une partie est en cours
@@ -165,15 +160,13 @@ getScore = (player1,player2) => {
 // Insertion des scores dans le DOM
 displayScores = () => {
     if(player1Score>=0 && player2Score>=0) {
-        // Score player 1
-        let scoreOne = document.getElementById('score-one');
-        scoreOne.innerHTML = '<h3 class="center">' + player1Score + '</h3>';
-        // Score player 2
-        let scoreTwo = document.getElementById('score-two');
-        scoreTwo.innerHTML = '<h3 class="center">' + player2Score + '</h3>';
+        // Score du player 1
+        document.getElementById('score-one').innerHTML = '<h3 class="center">' + player1Score + '</h3>';
+        // Score du player 2
+        document.getElementById('score-two').innerHTML = '<h3 class="center">' + player2Score + '</h3>';
     }
     else {
-        console.log('Error : no score to display.');
+        console.log('No score to display.');
     }
 }
 
@@ -195,7 +188,7 @@ displaySelectedItems = (gameChoice, player1, player2) => {
         }
         // Message d'erreur si aucune carte n'est sélectionnée
         else {
-            alert('Oups ! Select an item to start the game')
+            alert('Oups ! Select an item to start the game.')
         }
     }
 
@@ -204,7 +197,7 @@ displaySelectedItems = (gameChoice, player1, player2) => {
         itemsSelected.innerHTML = '<p>Player 1 : <span class="bold">' + player1 + '</span></p><p>Player 2 : <span class="bold">' + player2 + '</span></p>';
     }
     else {
-        console.log('displaySelectItem not working')
+        console.error('displaySelectItem not working')
     }
 }
 
@@ -212,18 +205,15 @@ displaySelectedItems = (gameChoice, player1, player2) => {
 phrase = (player1Point,player2Point) => {
     // Si Human gagne
     if(player1Point>player2Point) {
-        let winner = document.getElementById('motivation');
-        winner.innerHTML = '<p class="motivation-phrase">Great, you win !</p>';
+        document.getElementById('motivation').innerHTML = '<p class="motivation-phrase">Great, you win !</p>';
     }
     // Si Human perd
     else if(player1Point<player2Point) {
-        let looser = document.getElementById('motivation');
-        looser.innerHTML = '<p class="motivation-phrase">Oups, you loose. Choose another item !</p>';
+        document.getElementById('motivation').innerHTML = '<p class="motivation-phrase">Oups, you loose. Choose another item !</p>';
     }
     // En cas de match nul
     else if(player1Point === player2Point) {
-        let tryAgain = document.getElementById('motivation');
-        tryAgain.innerHTML = '<p class="motivation-phrase">No winner. Try again :)</p>';
+        document.getElementById('motivation').innerHTML = '<p class="motivation-phrase">No winner. Try again :)</p>';
     }
 }
 
@@ -240,15 +230,14 @@ playGameDesktopOnly = () => {
 }
 
 // Lancer le jeu : Desktop Vs Human
-playGameHumanVsDesktop = () => {
+playGameHumanVsDesktop = (player1,player2) => {
     // Définition des joueurs
-    let player1 = playerItem;
-    let player2 = getRandomItem();
+    player1 = playerItem;
+    player2 = getRandomItem();
     // Fonctions : Règle du jeu + Affichage des items + affichage des scores
     getScore(player1,player2);
     displaySelectedItems(gameChoice,player1,player2);
     displayScores(player1Score,player2Score);
-    // Insertion d'un message d'encouragement
     phrase(player1Point,player2Point);
     console.log('Partie en cours : Human:' + player1Point + ' Desktop: ' + player2Point + ' - Scores Human: ' + player1Score  + 'Desktop : ' + player2Score);
 }
